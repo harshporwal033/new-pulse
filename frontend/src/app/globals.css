@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #f4f6f9;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Make recharts bubbles clickable */
+.recharts-scatter-symbol { cursor: pointer; }
+.recharts-scatter-symbol:hover { filter: brightness(1.1); }
+
+/* Force disable browser SVG focus outlines on Recharts */
+.recharts-wrapper *:focus {
+    outline: none !important;
+}
+.recharts-scatter-symbol:focus {
+    outline: none !important;
+}

@@ -1,0 +1,7 @@
+feedparser
+requests
+trafilatura
+scikit-learn
+pymongo
+python-dotenv
+python-dateutil
