@@ -116,11 +116,21 @@ app.post('/ingest/trigger', (req, res) => {
     setTimeout(() => {
         jobs.set(jobId, { jobId, status: 'running', message: 'Scraping and clustering...' });
         
-        const pythonExecutable = path.join(__dirname, '..', 'scraper', 'venv', 'Scripts', 'python.exe');
+        const pythonPath = process.platform === 'win32'
+          ? path.join(__dirname, '..', 'scraper', 'venv', 'Scripts', 'python.exe')
+          : path.join(__dirname, '..', 'scraper', 'venv', 'bin', 'python');
         const scriptPath = path.join(__dirname, '..', 'scraper', 'main.py');
         
-        const pyProc = spawn(pythonExecutable, ['-u', scriptPath], {
+        const pyProc = spawn(pythonPath, ['-u', scriptPath], {
             cwd: path.join(__dirname, '..', 'scraper')
+        });
+
+        pyProc.on('error', (err) => {
+            console.error('Failed to start scraper process:', err);
+            jobs.set(jobId, { jobId, status: 'failed', message: 'Failed to start scraper process', error: err.toString() });
+            if (!res.headersSent) {
+                res.status(500).json({ error: 'Failed to start scraper process' });
+            }
         });
         
         let outData = '';
