@@ -15,7 +15,7 @@ import {
 import { format } from "date-fns";
 
 /* ── Constants ─────────────────────────────────────── */
-const API = "http://localhost:3000";
+const API = process.env.NEXT_PUBLIC_API_URL || 'https://news-pulse-api-s88c.onrender.com';
 const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
 const PALETTE = [
   "#3b82f6", "#10b981", "#8b5cf6", "#f59e0b",
