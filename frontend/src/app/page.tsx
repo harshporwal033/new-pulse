@@ -74,7 +74,7 @@ export default function Dashboard() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [detail, setDetail] = useState<ClusterDetail | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
-  const [sources, setSources] = useState({
+  const [sources, setSources] = useState<Record<string, boolean>>({
     "BBC News": true,
     "NPR": true,
     "The Guardian": true,
